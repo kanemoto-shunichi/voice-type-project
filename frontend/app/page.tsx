@@ -1,73 +1,74 @@
+import Navbar from "@/components/Navbar";
 import WaveVisualizer from "@/components/ui/WaveVisualizer";
-import { Mic, Sparkles, ChevronRight } from "lucide-react";
+import { Mic, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-24 text-center">
+    <div className="bg-black text-white selection:bg-cyan-500/30">
+      <Navbar />
       
-      {/* 背景のオーディオビジュアライザー */}
-      <WaveVisualizer />
+      <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4">
+        <WaveVisualizer />
 
-      {/* メインコンテンツ (z-indexで背景より手前に表示) */}
-      <div className="relative z-10 max-w-4xl space-y-8">
-        
-        {/* 信頼性のための小さなバッジ */}
-        <div className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm backdrop-blur-md animate-fade-in-down">
-          <Sparkles className="mr-2 h-4 w-4 text-cyan-400" />
-          <span className="text-gray-300">AI音声解析による性格診断</span>
-        </div>
-
-        {/* メインタイトル */}
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-7xl md:text-8xl animate-fade-in-up delay-100">
-          声は、語る。<br />
-          <span className="text-gradient-cyan block mt-2">あなたの真実を。</span>
-        </h1>
-
-        {/* サブタイトル */}
-        <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-400 sm:text-xl animate-fade-in-up delay-200 leading-relaxed">
-          voicetypeは、最新のAI音声解析技術を用いて、<br className="hidden sm:block"/>
-          声色、抑揚、リズムから、あなたの隠された性格タイプを精密に診断します。
-        </p>
-
-        {/* CTAボタンエリア */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
-          <Link
-            href="/diagnose" // 診断ページへのリンク（後で作成）
-            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-white px-8 py-4 font-bold text-gray-900 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
-          >
-            {/* ボタンの背景グラデーション効果 */}
-            <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 transition-opacity group-hover:opacity-10"></span>
-            
-            <Mic className="mr-2 h-5 w-5 text-cyan-600" />
-            診断を始める
-            <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </Link>
+        {/* ヒーローセクション */}
+        <div className="relative z-10 flex flex-col items-center space-y-8 pt-20">
+          <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl">
+            声で暴く、<br />
+            <span className="text-gradient-cyan">真実の自分。</span>
+          </h1>
           
-          <Link href="/about" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">
-            voicetypeとは？
-          </Link>
-        </div>
-
-        {/* 実績っぽい数字（オプション） */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-8 text-gray-400 animate-fade-in-up delay-500">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-white">16 Types</div>
-            <div className="text-sm">診断タイプ</div>
-          </div>
-          <div className="h-8 w-px bg-white/10 hidden sm:block"></div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-white">98.2%</div>
-            <div className="text-sm">AI解析精度 (理論値)</div>
+          <div className="flex flex-col items-center gap-6">
+            <Link
+              href="/voiceType"
+              className="group flex items-center gap-3 rounded-full bg-white px-10 py-5 text-lg font-bold text-black transition-all hover:scale-105"
+            >
+              <Mic className="h-6 w-6 text-cyan-600" />
+              診断を始める
+            </Link>
+            
+            <a href="#about" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+              概要を見る <ChevronDown className="h-4 w-4 animate-bounce" />
+            </a>
           </div>
         </div>
+      </main>
 
-      </div>
-      
-      {/* フッターっぽい装飾 */}
-      <div className="absolute bottom-4 text-center text-xs text-gray-500 animate-pulse">
-        Scroll to explore more
-      </div>
-    </main>
+      {/* 概要セクション */}
+      <section id="about" className="relative z-10 mx-auto max-w-4xl px-6 py-32">
+        <div className="space-y-16 rounded-[2.5rem] border border-white/10 bg-white/5 p-12 backdrop-blur-2xl">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold sm:text-4xl">VOICETYPE16とは？</h2>
+            <div className="mx-auto mt-4 h-1.5 w-20 rounded-full bg-cyan-500"></div>
+          </div>
+
+          <div className="grid gap-12 md:grid-cols-2">
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-cyan-400">AI音声解析エンジン</h3>
+              <p className="leading-relaxed text-gray-400">
+                あなたの声の周波数、リズム、抑揚をミリ秒単位で解析。
+                従来の質問形式の診断では見えてこない、無意識の性格傾向をデータ化します。
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-cyan-400">16の性格タイプ</h3>
+              <p className="leading-relaxed text-gray-400">
+                心理学的な16タイプ指標に基づき、あなたの声がどのタイプに近いかを判定。
+                「外面」ではなく「本質」に近いエネルギーを可視化します。
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-8 text-center border-t border-white/10">
+            <p className="text-sm text-gray-500 mb-6">
+              FaceType16（顔タイプ診断）と組み合わせることで、より立体的な自己分析が可能です。
+            </p>
+            <Link href="/diagnose" className="text-cyan-400 font-bold hover:underline">
+              さっそく声を解析する →
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
