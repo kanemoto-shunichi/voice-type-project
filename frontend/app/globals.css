@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* 1. テーマ設定（アニメーションや色の定義） */
+@theme {
+  /* アニメーションの登録 */
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+  --animate-fade-in-down: fade-in-down 0.8s ease-out forwards;
+
+  /* キーフレーム（標準CSSの書き方でOK） */
+  @keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in-down {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* 2. ベーススタイル（背景色など） */
+:root {
+  --background-start: #0a0a16;
+  --background-end: #12122a;
+}
+
+body {
+  color: white;
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--background-end)
+    )
+    var(--background-start);
+  min-height: 100vh;
+}
+
+/* 3. カスタムユーティリティ（グラデーション文字など） */
+@utility text-gradient-cyan {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600;
+}
+
+@utility text-gradient-purple {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600;
+}
